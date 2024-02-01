@@ -1,4 +1,4 @@
-import CreateCourseForm from "@/components/ThemeProvider/CreateCourseForm";
+import CreateCourseForm from "@/components/CreateCourseForm";
 import { getAuthSession } from "@/lib/auth";
 import { InfoIcon } from "lucide-react";
 import { redirect } from "next/navigation";

@@ -3,7 +3,7 @@ import React from "react";
 import SignInButton from "./SignInButton";
 import { getAuthSession } from "@/lib/auth";
 import UserAccountNav from "./UserAccountNav";
-import { ThemeToggle } from "./ThemeProvider/ThemeToggle";
+import { ThemeToggle } from "./Provider/ThemeToggle";
 
 const Navbar = async () => {
   const session = await getAuthSession();
