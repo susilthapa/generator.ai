@@ -13,7 +13,7 @@ const CreatePage = async () => {
       <h1 className="self-center text-3xl font-bold text-center sm:text-4xl">
         Learning Journey
       </h1>
-      <div className="flex gap-3 p-4 mt-5 border-none rounded-lg bg-secondary shadow-lg dark:shadow-gray-500 shadow-gray-600">
+      <div className="flex gap-3 p-4 mt-5 border-none bg-secondary shadow-lg dark:shadow-gray-500 shadow-gray-600">
         <InfoIcon className="w-14 h-14 text-blue-400" />
         <div>
           Enter a course title, or what you want to learn about. Then enter a
