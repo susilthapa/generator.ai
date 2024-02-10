@@ -24,7 +24,7 @@ export default function RootLayout({
       <body className={cn(lexend.className, "antialiased min-h-screen pt-16")}>
         <AppProvider>
           <Navbar />
-          {children}
+          <main className="h-full w-full p-2 sm:p4">{children}</main>
           <Toaster />
         </AppProvider>
       </body>
