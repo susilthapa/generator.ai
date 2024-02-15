@@ -20,12 +20,12 @@ export type ChapterCardHandler = {
 };
 
 const ChapterCard = React.forwardRef<ChapterCardHandler, Props>(
-  ({ chapter, setCompletedChapters }, ref) => {
+  ({ chapter, setCompletedChapters, completedChapters }, ref) => {
     const { toast } = useToast();
     const [success, setSuccess] = React.useState<boolean | null>(null);
     const { mutate: getChapterInfo, isPending } = useMutation({
       mutationFn: async () => {
-        const response = await axios.post("/api/chapter/getInfo", {
+        const response = await axios.post("/api/chapters/get-info", {
           chapterId: chapter.id,
         });
         return response.data;
@@ -49,6 +49,9 @@ const ChapterCard = React.forwardRef<ChapterCardHandler, Props>(
 
     React.useImperativeHandle(ref, () => ({
       async triggerLoad() {
+        if (completedChapters.has(chapter.id)) {
+          return;
+        }
         // check if video/questions and all are already generated
         if (chapter.videoId) {
           addChapterIdToSet();
@@ -60,14 +63,12 @@ const ChapterCard = React.forwardRef<ChapterCardHandler, Props>(
             addChapterIdToSet();
           },
           onError: (error) => {
-            console.error(error);
             setSuccess(false);
             toast({
               title: "Error",
               description: "There was an error loading your chapter",
               variant: "destructive",
             });
-            addChapterIdToSet();
           },
         });
       },

@@ -1,6 +1,6 @@
 "use client";
 import { Chapter, Course, Unit } from "@prisma/client";
-import React, { useEffect } from "react";
+import React, { useRef } from "react";
 import ChapterCard, { ChapterCardHandler } from "./ChapterCard";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
@@ -34,15 +34,17 @@ const ConfirmChapters = ({ course }: Props) => {
     }, 0);
   }, [course.units]);
 
-  useEffect(() => {
-    course.units.forEach((unit) => {
-      unit.chapters.forEach((chapter) => {
-        chapterRefs[chapter.id] = null;
-      });
+  course.units.forEach((unit) => {
+    unit.chapters.forEach((chapter) => {
+      chapterRefs[chapter.id] = useRef(null);
     });
-  }, [course]);
+  });
 
-  console.log(totalChaptersCount, completedChapters.size);
+  course.units.forEach((unit) => {
+    unit.chapters.forEach((chapter) => {
+      chapterRefs[chapter.id] = useRef(null);
+    });
+  });
 
   return (
     <div className="w-full mt-4">
@@ -102,12 +104,12 @@ const ConfirmChapters = ({ course }: Props) => {
                 Object.values(chapterRefs).forEach((ref) => {
                   ref?.current?.triggerLoad();
                 });
+                setLoading(false);
               }}
             >
               {!!completedChapters.size
                 ? "Regenerate unfinished chapter data"
                 : "Generate"}
-              Generate
               <ChevronRight className="w-4 h-4 ml-2" strokeWidth={4} />
             </Button>
           )}

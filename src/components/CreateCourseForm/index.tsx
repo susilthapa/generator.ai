@@ -49,7 +49,6 @@ const CreateCourseForm = () => {
         toast({
           title: "Success",
           description: "Course created successfully",
-          variant: "destructive",
         });
 
         router.push(`/create/${data.courseId}`);
